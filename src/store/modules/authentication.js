@@ -35,9 +35,10 @@ const actions = {
 
 const mutations = {
     INITIALIZE_STORE(state) {
-        if (localStorage.getItem('token')) {
-            state.token = localStorage.getItem('token')
+        if (localStorage.getItem("token")) {
+            state.token = localStorage.getItem("token")
             state.isAuthenticated = true
+            axios.defaults.headers.common['Authorization'] = "Token " + state.token
         } else {
             state.token = ''
             state.isAuthenticated = false
