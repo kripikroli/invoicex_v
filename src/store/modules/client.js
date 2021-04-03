@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'bulma-toast'
 import router from '../../router'
 
 const state = {
@@ -27,6 +28,17 @@ const actions = {
             .post('/api/v1/clients/', data)
             .then(res => {
                 commit('REDIRECT_TO_CLIENTS')
+
+                toast({
+                    message: 'Added successfully!',
+                    type: 'is-success',
+                    dismissible: true,
+                    pauseOnHover: true,
+                    duration: 2000,
+                    position: 'bottom-right',
+                    animate: { in: 'fadeIn', out: 'fadeOut' }
+                })
+
             })
             .catch(err => {
                 console.log(JSON.stringify(err))
@@ -38,6 +50,16 @@ const actions = {
             .then(res => {
                 commit('REDIRECT_TO_CLIENTS')
 
+                toast({
+                    message: 'Updated successfully!',
+                    type: 'is-success',
+                    dismissible: true,
+                    pauseOnHover: true,
+                    duration: 2000,
+                    position: 'bottom-right',
+                    animate: { in: 'fadeIn', out: 'fadeOut' }
+                })
+                
             })
             .catch(err => {
                 console.log(JSON.stringify(err))
