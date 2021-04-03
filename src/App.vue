@@ -13,6 +13,9 @@
             <router-link to="/dashboard" class="navbar-item"
               >Dashboard</router-link
             >
+            <router-link to="/dashboard/clients" class="navbar-item"
+              >Clients</router-link
+            >
             <div class="navbar-item">
               <div class="buttons">
                 <button @click="logout()" class="button is-danger">Logout</button>
