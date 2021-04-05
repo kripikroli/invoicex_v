@@ -18,9 +18,10 @@
             >
             <div class="navbar-item">
               <div class="buttons">
-                <button @click="logout()" class="button is-danger">Logout</button>
+                <router-link to="/dashboard/my-account" class="button is-light">My account</router-link>
               </div>
             </div> 
+            
           </template>
 
           <template v-else>

@@ -30,7 +30,7 @@ const actions = {
                 commit('REDIRECT_TO_CLIENTS')
 
                 toast({
-                    message: 'Added successfully!',
+                    message: 'Added client successfully!',
                     type: 'is-success',
                     dismissible: true,
                     pauseOnHover: true,
@@ -51,7 +51,7 @@ const actions = {
                 commit('REDIRECT_TO_CLIENTS')
 
                 toast({
-                    message: 'Updated successfully!',
+                    message: 'Updated client successfully!',
                     type: 'is-success',
                     dismissible: true,
                     pauseOnHover: true,

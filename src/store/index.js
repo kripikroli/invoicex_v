@@ -4,6 +4,7 @@ import signup from './modules/signup'
 import login from './modules/login'
 import clients from './modules/clients'
 import client from './modules/client'
+import team from './modules/team'
 
 export default createStore({
   modules: {
@@ -13,7 +14,8 @@ export default createStore({
     signup,
     login,
     clients,
-    client
+    client,
+    team
   }
 })
 
