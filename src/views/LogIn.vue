@@ -30,6 +30,10 @@
                     </div>
 
                 </form>
+
+                <hr>
+
+                <router-link to="/signup">Click here</router-link> to sign up!
             </div>
         </div>
     </div>

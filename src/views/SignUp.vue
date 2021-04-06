@@ -8,14 +8,14 @@
                     <div class="field">
                         <label>Username</label>
                         <div class="control">
-                            <input type="text" class="input" v-model="username">
+                            <input autocomplete="" type="text" class="input" v-model="username">
                         </div>
                     </div>
 
                     <div class="field">
                         <label>Password</label>
                         <div class="control">
-                            <input type="password" class="input" v-model="password">
+                            <input autocomplete="" type="password" class="input" v-model="password">
                         </div>
                     </div>
 
@@ -30,6 +30,10 @@
                     </div>
 
                 </form>
+
+                <hr>
+
+                <router-link to="/login">Click here</router-link> to log in!
             </div>
         </div>
     </div>
