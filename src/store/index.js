@@ -5,6 +5,8 @@ import login from './modules/login'
 import clients from './modules/clients'
 import client from './modules/client'
 import team from './modules/team'
+import invoices from './modules/invoices'
+import invoice from './modules/invoice'
 
 export default createStore({
   modules: {
@@ -15,7 +17,9 @@ export default createStore({
     login,
     clients,
     client,
-    team
+    team,
+    invoices,
+    invoice
   }
 })
 

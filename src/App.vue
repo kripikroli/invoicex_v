@@ -16,6 +16,9 @@
             <router-link to="/dashboard/clients" class="navbar-item"
               >Clients</router-link
             >
+            <router-link to="/dashboard/invoices" class="navbar-item"
+              >Invoices</router-link
+            >
             <div class="navbar-item">
               <div class="buttons">
                 <router-link to="/dashboard/my-account" class="button is-light">My account</router-link>
