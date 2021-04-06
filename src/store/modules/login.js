@@ -1,7 +1,5 @@
-import Vuex from 'vuex'
 import axios from 'axios'
-import authentication from './authentication'
-import router from '../../router'
+import router from '@/router'
 
 const state = {
    errors: []
@@ -26,11 +24,27 @@ const actions = {
 
                 localStorage.setItem("token", token)
 
-                router.push('/dashboard')
+                dispatch('getMe')
                 
             })
             .catch(err => {
                 commit('STORE_LOGIN_ERRORS', err);
+            })
+    },
+    getMe({commit, dispatch}) {
+        axios
+            .get("/api/v1/users/me/")
+            .then(res => {
+                const me = { 'username': res.data.username, 'id': res.data.id }
+                dispatch('authentication/setUser', me, { root : true })
+
+                localStorage.setItem('username', res.data.username)
+                localStorage.setItem('userid', res.data.id)
+
+                router.push('/dashboard')
+            })
+            .catch(err => {
+                console.log(JSON.stringify(err))
             })
     },
     logout({commit, dispatch}) {
@@ -41,6 +55,8 @@ const actions = {
                 axios.defaults.headers.common["Authorization"] = ""
 
                 localStorage.removeItem("token")
+                localStorage.removeItem("userid")
+                localStorage.removeItem("username")
 
                 dispatch('authentication/removeToken', null, { root : true })
 

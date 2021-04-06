@@ -1,10 +1,9 @@
 import axios from 'axios'
-import router from '../../router'
-
-
+import router from '@/router'
 
 const state = {
     user: {
+        id: '',
         username: ''
     },
     isAuthenticated: false,
@@ -13,7 +12,8 @@ const state = {
 
 
 const getters = {
-    authenticated: (state) => state.isAuthenticated
+    authenticated: (state) => state.isAuthenticated,
+    user: (state) => state.user
 }
 
 
@@ -29,6 +29,9 @@ const actions = {
     },
     removeToken({commit}) {
         commit('REMOVE_TOKEN')
+    },
+    setUser({commit}, user) {
+        commit('SET_USER', user)
     }
     
 }
@@ -38,8 +41,12 @@ const mutations = {
         if (localStorage.getItem("token")) {
             state.token = localStorage.getItem("token")
             state.isAuthenticated = true
+            state.user.id = localStorage.getItem('userid')
+            state.user.username = localStorage.getItem('username')
             axios.defaults.headers.common['Authorization'] = "Token " + state.token
         } else {
+            state.user.id = ''
+            state.user.username = ''
             state.token = ''
             state.isAuthenticated = false
         }
@@ -59,6 +66,9 @@ const mutations = {
         state.token = ''
         state.isAuthenticated = false
         router.push('/login')
+    },
+    SET_USER(state, user) {
+        state.user = user
     }
 }
 

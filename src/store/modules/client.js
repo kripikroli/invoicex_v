@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { toast } from 'bulma-toast'
-import router from '../../router'
+import router from '@/router'
 
 const state = {
     client: []
