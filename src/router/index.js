@@ -9,6 +9,7 @@ import MyAccount from '../views/dashboard/MyAccount.vue'
 import EditTeam from '../views/dashboard/EditTeam.vue'
 import Invoices from '../views/dashboard/Invoices.vue'
 import Invoice from '../views/dashboard/Invoice.vue'
+import AddInvoice from '../views/dashboard/AddInvoice.vue'
 import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
 
@@ -51,6 +52,14 @@ const routes = [
     path: '/dashboard/invoices',
     name: 'Invoices',
     component: Invoices,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/invoices/add',
+    name: 'AddInvoice',
+    component: AddInvoice,
     meta: {
       requireLogin: true
     }

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { toast } from 'bulma-toast'
+import router from '../../router'
 
 const state = {
     invoice: {},
@@ -20,6 +21,28 @@ const actions = {
                 console.log(JSON.stringify(err))
             })
     },
+    addInvoice({commit}, data) {
+        axios
+            .post('/api/v1/invoices/', data)
+            .then(res => {
+
+                commit('REDIRECT_TO_INVOICES')
+
+                toast({
+                    message: 'Added invoice successfully!',
+                    type: 'is-success',
+                    dismissible: true,
+                    pauseOnHover: true,
+                    duration: 2000,
+                    position: 'bottom-right',
+                    animate: { in: 'fadeIn', out: 'fadeOut' }
+                })
+                
+            })
+            .catch(error => {
+                console.log(JSON.stringify(error))
+            })
+    }
 }
 
 const mutations = {
@@ -29,6 +52,9 @@ const mutations = {
             state.invoice = data
         }
     },
+    REDIRECT_TO_INVOICES(state) {
+        router.push('/dashboard/invoices')
+    }
 }
 
 export default ({

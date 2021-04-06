@@ -16,7 +16,6 @@ const actions = {
             .get('/api/v1/invoices/')
             .then(res => {
                 commit('POPULATE_INVOICES', res.data)
-                console.log(res.data)
             })
             .catch(err => {
                 console.log(JSON.stringify(err))
