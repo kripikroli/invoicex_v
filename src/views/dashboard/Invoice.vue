@@ -3,6 +3,10 @@
         <div class="columns is-multiline">
             <div class="column is-12">
                 <h1 class="title">Invoice - {{ invoice.invoice_number }} </h1>
+
+                <hr>
+
+                <button @click="generatePdf(this.$route.params.id)" class="button is-dark">Download PDF</button>
             </div>
 
             <div class="column is-12 mb-4">
@@ -57,13 +61,13 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
     name: "Invoice",
     methods: {
-        ...mapActions('invoice', ['getInvoice']),
+        ...mapActions('invoice', ['getInvoice', 'generatePdf']),
         getItemTotal(item) {
             const unit_price = item.unit_price
             const quantity = item.quantity
             const total = item.net_amount + (item.net_amount * (item.vat_rate / 100))
             return parseFloat(total).toFixed(2)
-        }
+        },
     },
     computed: {
         ...mapGetters('invoice', ['invoice'])

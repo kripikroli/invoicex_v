@@ -2,6 +2,8 @@ import axios from 'axios'
 import { toast } from 'bulma-toast'
 import router from '@/router'
 
+const fileDownload = require('js-file-download')
+
 const state = {
     invoice: {},
 }
@@ -42,6 +44,16 @@ const actions = {
             .catch(error => {
                 console.log(JSON.stringify(error))
             })
+    },
+    generatePdf({commit}, id) {
+        axios
+            .get(`/api/v1/invoices/${id}/generate_pdf/`, {
+                responseType: 'blob',
+            }).then(res => {
+                fileDownload(res.data, `invoice_${id}.pdf`)
+            }).catch(err => {
+                console.log(err);
+            })
     }
 }
 
@@ -54,7 +66,7 @@ const mutations = {
     },
     REDIRECT_TO_INVOICES(state) {
         router.push('/dashboard/invoices')
-    }
+    },
 }
 
 export default ({
