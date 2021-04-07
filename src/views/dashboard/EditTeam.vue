@@ -40,6 +40,69 @@
                 </div>
             </div>
 
+            <div class="column is-12">
+                <div class="field">
+                    <label>Email</label>
+                    <div class="control">
+                        <input type="email" class="input" v-model="team.email">
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12">
+                <div class="field">
+                    <label>Address line 1</label>
+                    <div class="control">
+                        <input type="text" class="input" v-model="team.address_line_1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12">
+                <div class="field">
+                    <label>Address line 2</label>
+                    <div class="control">
+                        <input type="text" class="input" v-model="team.address_line_2">
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12">
+                <div class="field">
+                    <label>City</label>
+                    <div class="control">
+                        <input type="text" class="input" v-model="team.city_name">
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12">
+                <div class="field">
+                    <label>State</label>
+                    <div class="control">
+                        <input type="text" class="input" v-model="team.state_name">
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12">
+                <div class="field">
+                    <label>Country</label>
+                    <div class="control">
+                        <input type="text" class="input" v-model="team.country_name">
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12">
+                <div class="field">
+                    <label>Zipcode</label>
+                    <div class="control">
+                        <input type="text" class="input" v-model="team.zip_code">
+                    </div>
+                </div>
+            </div>
+
             <div class="field">
                 <div class="control">
                     <button class="button is-success" @click="submitForm">Save</button>
