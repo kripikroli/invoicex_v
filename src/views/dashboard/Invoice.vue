@@ -24,8 +24,6 @@
       <div class="column is-12">
         <h1 class="title">Invoice - {{ invoice.invoice_number }}</h1>
 
-        <hr />
-
         <button
           @click="generatePdf(this.$route.params.id)"
           class="button is-dark"
@@ -57,7 +55,7 @@
         </div>
       </div>
 
-      <div class="column is-12">
+      <div class="column is-12 mb-4">
         <div class="box">
           <h3 class="is-size-4">Items</h3>
 
@@ -85,6 +83,30 @@
           </table>
         </div>
       </div>
+
+      <div class="column is-12">
+        <div class="box">
+          <h3 class="is-size-4 mb-5">Summary</h3>
+
+          <div class="columns">
+            <div class="column is-6">
+              <p><strong>Net amount</strong>: {{ invoice.net_amount }}</p>
+              <p><strong>Vat amount</strong>: {{ invoice.vat_amount }}</p>
+              <p><strong>Gross amount</strong>: {{ invoice.gross_amount }}</p>
+              <p><strong>Bank account</strong>: {{ invoice.bank_account }}</p>
+            </div>
+
+            <div class="column is-6">
+              <p><strong>Our reference</strong>: {{ invoice.sender_reference }}</p>
+              <p><strong>Client reference</strong>: {{ invoice.client_contact_reference }}</p>
+              <p><strong>Due date</strong>: {{ invoice.get_due_date_formatted }}</p>
+              <p><strong>Status</strong>: {{ getStatusLabel() }}</p>
+              <p><strong>Invoice type</strong>: {{ getInvoiceType() }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -96,6 +118,26 @@ export default {
   name: "Invoice",
   methods: {
     ...mapActions("invoice", ["getInvoice", "generatePdf"]),
+    getItemTotal(item) {
+      const unit_price = item.unit_price;
+      const quantity = item.quantity;
+      const total = item.net_amount + item.net_amount * (item.vat_rate / 100);
+      return parseFloat(total).toFixed(2);
+    },
+    getStatusLabel() {
+      if (this.invoice.is_paid) {
+        return "Is paid";
+      } else {
+        return "Is not paid";
+      }
+    },
+    getInvoiceType() {
+      if (this.invoice.invoice_type === "credit_note") {
+        return "Credit note";
+      } else {
+        return "Invoice";
+      }
+    },
     getItemTotal(item) {
       const unit_price = item.unit_price;
       const quantity = item.quantity;
