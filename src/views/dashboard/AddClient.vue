@@ -1,5 +1,25 @@
 <template>
   <div class="page-add-client">
+    <nav
+      class="breadcrumb"
+      aria-label="breadcrumbs"
+    >
+      <ul>
+        <li>
+          <router-link to="/dashboard">Dashboard</router-link>
+        </li>
+        <li>
+          <router-link to="/dashboard/clients">Clients</router-link>
+        </li>
+        <li class="is-active">
+          <router-link
+            to="/dashboard/clients/add"
+            aria-current="true"
+          >Add</router-link>
+        </li>
+      </ul>
+    </nav>
+
     <div class="columns is-multiline">
       <div class="column is-12">
         <h1 class="title">Add client</h1>
@@ -111,13 +131,15 @@
             />
           </div>
         </div>
-
       </div>
 
       <div class="column is-12">
         <div class="field">
           <div class="control">
-            <button class="button is-success" @click="submitForm">
+            <button
+              class="button is-success"
+              @click="submitForm"
+            >
               Submit
             </button>
           </div>
@@ -128,20 +150,20 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 
 export default {
   name: "AddClient",
   data() {
     return {
-      client: {},
+      client: {}
     };
   },
   methods: {
-      ...mapActions('client', ['addClient']),
-      submitForm() {
-          this.addClient(this.client)
-      }
-  },
+    ...mapActions("client", ["addClient"]),
+    submitForm() {
+      this.addClient(this.client);
+    }
+  }
 };
 </script>
