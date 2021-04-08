@@ -1,7 +1,7 @@
 <template>
   <div id="wrapper">
     <nav class="navbar is-dark">
-      <div class="navbar-brand">
+      <div class="navbar-brand ml-5">
         <router-link
           to="/"
           class="navbar-item"
