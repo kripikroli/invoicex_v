@@ -6,7 +6,8 @@ const state = {
 
 
 const getters = {
-    clients: (state) => state.clients
+    clients: (state) => state.clients,
+    limitedClients: (state) => state.clients.slice(0, 5)
 }
 
 

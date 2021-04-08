@@ -5,8 +5,7 @@ const state = {
 }
 
 const getters = {
-    invoices: (state) => state.invoices
-
+    invoices: (state) => state.invoices,
 }
 
 const actions = {
