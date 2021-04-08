@@ -54,6 +54,67 @@ const actions = {
             }).catch(err => {
                 console.log(err);
             })
+    },
+    setAsPaid({commit}, data) {
+        
+        axios
+            .patch(`/api/v1/invoices/${data.id}/`, data)
+            .then(res => {
+
+                toast({
+                    message: 'The changes was saved!',
+                    type: 'is-success',
+                    dismissible: true,
+                    pauseOnHover: true,
+                    duration: 2000,
+                    position: 'bottom-right',
+                    animate: { in: 'fadeIn', out: 'fadeOut' }
+                })
+            })
+            .catch(err => {
+                console.log(JSON.stringify(err))
+            })
+    },
+    makeCredited({commit}, data) {
+        axios
+            .patch(`/api/v1/invoices/${data.id}/`, data)
+            .then(res => {
+                
+                toast({
+                    message: 'The changes was saved!',
+                    type: 'is-success',
+                    dismissible: true,
+                    pauseOnHover: true,
+                    duration: 2000,
+                    position: 'bottom-right',
+                    animate: { in: 'fadeIn', out: 'fadeOut' }
+                })
+
+            })
+            .catch(err => {
+                console.log(JSON.stringify(err))
+            })
+    },
+    makeCreditNote({commit}, data) {
+        axios
+            .post('api/v1/invoices/', data)
+            .then(res => {
+
+                toast({
+                    message: 'Credit note was created!',
+                    type: 'is-success',
+                    dismissible: true,
+                    pauseOnHover: true,
+                    duration: 2000,
+                    position: 'bottom-right',
+                    animate: { in: 'fadeIn', out: 'fadeOut' }
+                })
+
+                commit('REDIRECT_TO_INVOICES')
+            })
+            .catch(err => {
+                console.log(JSON.stringify(err))
+            })
     }
 }
 

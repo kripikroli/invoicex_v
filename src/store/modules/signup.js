@@ -17,7 +17,6 @@ const actions = {
         axios
             .post("/api/v1/users/", formData)
             .then(res => {
-                console.log(res)
                 router.push('/login')
             })
             .catch(err => {

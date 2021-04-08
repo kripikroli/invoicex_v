@@ -69,6 +69,7 @@
           <p v-if="invoice.client.country_name || invoice.client.zip_code">
             {{ invoice.client.country_name }} {{ invoice.client.zip_code }}
           </p>
+
         </div>
 
         <div class="column is-12">
@@ -121,7 +122,7 @@
         <h2 class="is-size-5 mb-4">Total</h2>
 
         <p><strong>Net amount</strong>: {{ invoice.net_amount }}</p>
-        <p><strong>Vat amount</strong>: {{ invoice.vat_amount }}</p>
+        <p><strong>Vat amount</strong>: {{ formatFloat(invoice.vat_amount) }}</p>
         <p><strong>Gross amount</strong>: {{ invoice.gross_amount }}</p>
       </div>
     </div>
@@ -192,9 +193,13 @@ export default {
       this.invoice.client_country_name = this.invoice.client.country_name;
       this.invoice.client_contact_person = this.invoice.client.contact_person;
       this.invoice.client_contact_reference = this.invoice.client.contact_reference;
+      this.invoice.vat_amount = this.formatFloat(this.invoice.vat_amount);
       this.invoice.client = this.invoice.client.id;
 
       this.addInvoice(this.invoice);
+    },
+    formatFloat(number) {
+      return parseFloat(number).toFixed(2);
     }
   },
   computed: {

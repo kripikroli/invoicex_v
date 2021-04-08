@@ -31,6 +31,7 @@
             <th>#</th>
             <th>Client</th>
             <th>Amount</th>
+            <th>Due date</th>
             <th>Is Paid</th>
             <th></th>
           </thead>
@@ -42,7 +43,8 @@
               <td>{{ invoice.invoice_number }}</td>
               <td>{{ invoice.client_name }}</td>
               <td>{{ invoice.gross_amount }}</td>
-              <td>{{ invoice.is_paid }}</td>
+              <td>{{ invoice.get_due_date_formatted }}</td>
+              <td>{{ getStatusLabel(invoice.is_paid) }}</td>
               <td>
                 <router-link :to="{ name: 'Invoice', params: { id: invoice.id } }">Details</router-link>
               </td>
@@ -61,7 +63,14 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Invoices",
   methods: {
-    ...mapActions("invoices", ["getInvoices"])
+    ...mapActions("invoices", ["getInvoices"]),
+    getStatusLabel(isPaid) {
+      if (isPaid) {
+        return "Yes";
+      } else {
+        return "No";
+      }
+    }
   },
   computed: {
     ...mapGetters("invoices", ["invoices"])

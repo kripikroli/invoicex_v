@@ -3,7 +3,9 @@ import { toast } from 'bulma-toast'
 import router from '@/router'
 
 const state = {
-    client: []
+    client: {
+        invoices: []
+    }
 }
 
 
@@ -13,8 +15,8 @@ const getters = {
 
 
 const actions = {
-    getClient({commit}, id) {
-        axios
+    async getClient({commit}, id) {
+        await axios
             .get(`/api/v1/clients/${id}`)
             .then(res => {
                 commit('SET_CLIENT_DETAIL', res.data)

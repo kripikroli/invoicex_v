@@ -24,12 +24,29 @@
       <div class="column is-12">
         <h1 class="title">Invoice - {{ invoice.invoice_number }}</h1>
 
-        <button
-          @click="generatePdf(this.$route.params.id)"
-          class="button is-dark"
-        >
-          Download PDF
-        </button>
+        <div class="buttons">
+
+          <button
+            @click="generatePdf(this.$route.params.id)"
+            class="button is-dark"
+          >
+            Download PDF
+          </button>
+
+          <template v-if="!invoice.is_credit_for && !invoice.is_credited">
+            <button
+              @click="setInvoiceAsPaid()"
+              class="button is-success"
+              v-if="!invoice.is_paid"
+            >Set as paid</button>
+            <button
+              @click="createCreditNote()"
+              class="button is-danger"
+              v-if="!invoice.is_paid"
+            >Create credit note</button>
+          </template>
+
+        </div>
       </div>
 
       <div class="column is-12 mb-4">
@@ -117,7 +134,14 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Invoice",
   methods: {
-    ...mapActions("invoice", ["getInvoice", "generatePdf"]),
+    ...mapActions("invoice", [
+      "getInvoice",
+      "generatePdf",
+      "setAsPaid",
+      "makeCredited",
+      "makeCreditNote"
+    ]),
+    ...mapActions("client", ["getClient"]),
     getItemTotal(item) {
       const unit_price = item.unit_price;
       const quantity = item.quantity;
@@ -143,6 +167,37 @@ export default {
       const quantity = item.quantity;
       const total = item.net_amount + item.net_amount * (item.vat_rate / 100);
       return parseFloat(total).toFixed(2);
+    },
+    setInvoiceAsPaid() {
+      this.invoice.is_paid = true;
+
+      let items = this.invoice.items;
+
+      delete this.invoice["items"];
+
+      this.setAsPaid(this.invoice);
+
+      this.invoice.items = items;
+    },
+    async createCreditNote() {
+      this.invoice.is_credited = true;
+
+      let items = this.invoice.items;
+
+      delete this.invoice["items"];
+
+      await this.makeCredited(this.invoice);
+
+      this.invoice.items = items;
+
+      let creditNote = this.invoice;
+      creditNote.is_credit_for = this.invoice.id;
+      creditNote.is_credited = false;
+      creditNote.invoice_type = "credit_note";
+
+      delete creditNote["id"];
+
+      await this.makeCreditNote(creditNote);
     }
   },
   computed: {

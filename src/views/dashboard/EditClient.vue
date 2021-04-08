@@ -58,6 +58,23 @@
         </div>
 
         <div class="field">
+          <label>Company number</label>
+
+          <div class="control">
+            <input
+              type="text"
+              name="company_number"
+              class="input"
+              v-model="client.company_number"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="column is-6">
+
+        <div class="field">
           <label>Address 1</label>
 
           <div class="control">
@@ -82,9 +99,7 @@
             />
           </div>
         </div>
-      </div>
 
-      <div class="column is-6">
         <div class="field">
           <label>City</label>
 
