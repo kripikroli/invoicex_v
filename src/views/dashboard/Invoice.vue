@@ -46,6 +46,12 @@
             >Create credit note</button>
           </template>
 
+          <button
+            @click="sendReminder(invoice.id)"
+            class="button is-info"
+            v-if="!invoice.is_paid && !invoice.is_credit_for"
+          >Send reminder</button>
+
         </div>
       </div>
 
@@ -139,7 +145,8 @@ export default {
       "generatePdf",
       "setAsPaid",
       "makeCredited",
-      "makeCreditNote"
+      "makeCreditNote",
+      "sendReminder"
     ]),
     ...mapActions("client", ["getClient"]),
     getItemTotal(item) {

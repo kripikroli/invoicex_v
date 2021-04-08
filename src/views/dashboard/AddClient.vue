@@ -170,7 +170,9 @@ export default {
   name: "AddClient",
   data() {
     return {
-      client: {}
+      client: {
+        invoices: []
+      }
     };
   },
   methods: {

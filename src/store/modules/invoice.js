@@ -115,6 +115,26 @@ const actions = {
             .catch(err => {
                 console.log(JSON.stringify(err))
             })
+    },
+    sendReminder({commit}, id) {
+        axios
+            .get(`/api/v1/invoices/${id}/send_reminder/`)
+            .then(response => {
+                
+                toast({
+                    message: 'Reminder was sent!',
+                    type: 'is-success',
+                    dismissible: true,
+                    pauseOnHover: true,
+                    duration: 2000,
+                    position: 'bottom-right',
+                    animate: { in: 'fadeIn', out: 'fadeOut' }
+                })
+
+            })
+            .catch(err => {
+                console.log(JSON.stringify(err))
+            })
     }
 }
 
